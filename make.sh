@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGE="xaihr"
+PACKAGE="github.com\/xAmbit-ai\/xaihr"
 TO_REPLACE='xai_go_package'
 
 mkdir proto

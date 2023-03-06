@@ -1,4 +1,4 @@
-module xaihr
+module github.com/xAmbit-ai/xaihr
 
 go 1.19
 

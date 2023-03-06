@@ -3,8 +3,9 @@ package xaihr
 import (
 	"context"
 	"log"
-	"xaihr/types"
-	cv "xaihr/xapp_cv_extract"
+
+	"github.com/xAmbit-ai/xaihr/types"
+	cv "github.com/xAmbit-ai/xaihr/xapp_cv_extract"
 
 	"google.golang.org/grpc/metadata"
 )

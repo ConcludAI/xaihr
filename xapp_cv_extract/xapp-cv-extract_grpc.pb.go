@@ -42,6 +42,8 @@ type XappCVExtractClient interface {
 	UpdateConfig(ctx context.Context, in *UpdateCfg, opts ...grpc.CallOption) (*Cfg, error)
 	// Gets result
 	GetPrediction(ctx context.Context, in *GetResultForJob, opts ...grpc.CallOption) (*ParseResult, error)
+	// returns recent predictions
+	Recent(ctx context.Context, in *types.RecentPredsInput, opts ...grpc.CallOption) (*RecentPreds, error)
 }
 
 type xappCVExtractClient struct {
@@ -133,6 +135,15 @@ func (c *xappCVExtractClient) GetPrediction(ctx context.Context, in *GetResultFo
 	return out, nil
 }
 
+func (c *xappCVExtractClient) Recent(ctx context.Context, in *types.RecentPredsInput, opts ...grpc.CallOption) (*RecentPreds, error) {
+	out := new(RecentPreds)
+	err := c.cc.Invoke(ctx, "/xapp_cv_extract.XappCVExtract/Recent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // XappCVExtractServer is the server API for XappCVExtract service.
 // All implementations must embed UnimplementedXappCVExtractServer
 // for forward compatibility
@@ -155,6 +166,8 @@ type XappCVExtractServer interface {
 	UpdateConfig(context.Context, *UpdateCfg) (*Cfg, error)
 	// Gets result
 	GetPrediction(context.Context, *GetResultForJob) (*ParseResult, error)
+	// returns recent predictions
+	Recent(context.Context, *types.RecentPredsInput) (*RecentPreds, error)
 	mustEmbedUnimplementedXappCVExtractServer()
 }
 
@@ -188,6 +201,9 @@ func (UnimplementedXappCVExtractServer) UpdateConfig(context.Context, *UpdateCfg
 }
 func (UnimplementedXappCVExtractServer) GetPrediction(context.Context, *GetResultForJob) (*ParseResult, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPrediction not implemented")
+}
+func (UnimplementedXappCVExtractServer) Recent(context.Context, *types.RecentPredsInput) (*RecentPreds, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Recent not implemented")
 }
 func (UnimplementedXappCVExtractServer) mustEmbedUnimplementedXappCVExtractServer() {}
 
@@ -364,6 +380,24 @@ func _XappCVExtract_GetPrediction_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _XappCVExtract_Recent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(types.RecentPredsInput)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(XappCVExtractServer).Recent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/xapp_cv_extract.XappCVExtract/Recent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(XappCVExtractServer).Recent(ctx, req.(*types.RecentPredsInput))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // XappCVExtract_ServiceDesc is the grpc.ServiceDesc for XappCVExtract service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -406,6 +440,10 @@ var XappCVExtract_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPrediction",
 			Handler:    _XappCVExtract_GetPrediction_Handler,
+		},
+		{
+			MethodName: "Recent",
+			Handler:    _XappCVExtract_Recent_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

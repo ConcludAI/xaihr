@@ -1361,6 +1361,77 @@ func (*KeyValue_F) isKeyValue_Value() {}
 
 func (*KeyValue_Byte) isKeyValue_Value() {}
 
+type RecentPredsInput struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Xapp    *XappIdentifier `protobuf:"bytes,1,opt,name=xapp,proto3" json:"xapp,omitempty"`
+	Perpage int32           `protobuf:"varint,2,opt,name=perpage,proto3" json:"perpage,omitempty"`
+	Page    int32           `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	Test    *bool           `protobuf:"varint,15,opt,name=test,proto3,oneof" json:"test,omitempty"`
+}
+
+func (x *RecentPredsInput) Reset() {
+	*x = RecentPredsInput{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_types_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RecentPredsInput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecentPredsInput) ProtoMessage() {}
+
+func (x *RecentPredsInput) ProtoReflect() protoreflect.Message {
+	mi := &file_types_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecentPredsInput.ProtoReflect.Descriptor instead.
+func (*RecentPredsInput) Descriptor() ([]byte, []int) {
+	return file_types_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *RecentPredsInput) GetXapp() *XappIdentifier {
+	if x != nil {
+		return x.Xapp
+	}
+	return nil
+}
+
+func (x *RecentPredsInput) GetPerpage() int32 {
+	if x != nil {
+		return x.Perpage
+	}
+	return 0
+}
+
+func (x *RecentPredsInput) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *RecentPredsInput) GetTest() bool {
+	if x != nil && x.Test != nil {
+		return *x.Test
+	}
+	return false
+}
+
 var File_types_proto protoreflect.FileDescriptor
 
 var file_types_proto_rawDesc = []byte{
@@ -1561,7 +1632,16 @@ var file_types_proto_rawDesc = []byte{
 	0x28, 0x03, 0x48, 0x00, 0x52, 0x03, 0x69, 0x36, 0x34, 0x12, 0x0e, 0x0a, 0x01, 0x66, 0x18, 0x05,
 	0x20, 0x01, 0x28, 0x02, 0x48, 0x00, 0x52, 0x01, 0x66, 0x12, 0x14, 0x0a, 0x04, 0x62, 0x79, 0x74,
 	0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0c, 0x48, 0x00, 0x52, 0x04, 0x62, 0x79, 0x74, 0x65, 0x42,
-	0x07, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x22, 0x5a, 0x20, 0x67, 0x69, 0x74, 0x68,
+	0x07, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x8d, 0x01, 0x0a, 0x10, 0x52, 0x65, 0x63,
+	0x65, 0x6e, 0x74, 0x50, 0x72, 0x65, 0x64, 0x73, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x12, 0x29, 0x0a,
+	0x04, 0x78, 0x61, 0x70, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x74, 0x79,
+	0x70, 0x65, 0x73, 0x2e, 0x58, 0x61, 0x70, 0x70, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x66, 0x69,
+	0x65, 0x72, 0x52, 0x04, 0x78, 0x61, 0x70, 0x70, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x65, 0x72, 0x70,
+	0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x07, 0x70, 0x65, 0x72, 0x70, 0x61,
+	0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x61, 0x67, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x04, 0x70, 0x61, 0x67, 0x65, 0x12, 0x17, 0x0a, 0x04, 0x74, 0x65, 0x73, 0x74, 0x18, 0x0f,
+	0x20, 0x01, 0x28, 0x08, 0x48, 0x00, 0x52, 0x04, 0x74, 0x65, 0x73, 0x74, 0x88, 0x01, 0x01, 0x42,
+	0x07, 0x0a, 0x05, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x42, 0x22, 0x5a, 0x20, 0x67, 0x69, 0x74, 0x68,
 	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x41, 0x6d, 0x62, 0x69, 0x74, 0x2d, 0x61, 0x69,
 	0x2f, 0x78, 0x61, 0x69, 0x68, 0x72, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x62, 0x06, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x33,
@@ -1579,7 +1659,7 @@ func file_types_proto_rawDescGZIP() []byte {
 	return file_types_proto_rawDescData
 }
 
-var file_types_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_types_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_types_proto_goTypes = []interface{}{
 	(*Xapp)(nil),             // 0: types.Xapp
 	(*XappMeta)(nil),         // 1: types.XappMeta
@@ -1596,35 +1676,37 @@ var file_types_proto_goTypes = []interface{}{
 	(*TrainingStats)(nil),    // 12: types.TrainingStats
 	(*StatsRange)(nil),       // 13: types.StatsRange
 	(*KeyValue)(nil),         // 14: types.KeyValue
-	(Templatestate)(0),       // 15: types.templatestate
-	(Freq)(0),                // 16: types.freq
-	(Channel)(0),             // 17: types.channel
-	(Domain)(0),              // 18: types.domain
-	(Tointegrate)(0),         // 19: types.tointegrate
+	(*RecentPredsInput)(nil), // 15: types.RecentPredsInput
+	(Templatestate)(0),       // 16: types.templatestate
+	(Freq)(0),                // 17: types.freq
+	(Channel)(0),             // 18: types.channel
+	(Domain)(0),              // 19: types.domain
+	(Tointegrate)(0),         // 20: types.tointegrate
 }
 var file_types_proto_depIdxs = []int32{
 	2,  // 0: types.Xapp.template:type_name -> types.Template
 	1,  // 1: types.Xapp.meta:type_name -> types.XappMeta
-	15, // 2: types.XappMeta.status:type_name -> types.templatestate
-	16, // 3: types.XappMeta.trainfreq:type_name -> types.freq
+	16, // 2: types.XappMeta.status:type_name -> types.templatestate
+	17, // 3: types.XappMeta.trainfreq:type_name -> types.freq
 	4,  // 4: types.XappMeta.input:type_name -> types.Io
-	17, // 5: types.Template.channel:type_name -> types.channel
-	18, // 6: types.Template.domain:type_name -> types.domain
+	18, // 5: types.Template.channel:type_name -> types.channel
+	19, // 6: types.Template.domain:type_name -> types.domain
 	3,  // 7: types.Template.train:type_name -> types.Train
 	4,  // 8: types.Template.io:type_name -> types.Io
-	19, // 9: types.Template.tointegrate:type_name -> types.tointegrate
-	17, // 10: types.Train.channel:type_name -> types.channel
-	15, // 11: types.Io.status:type_name -> types.templatestate
-	17, // 12: types.Io.channel:type_name -> types.channel
+	20, // 9: types.Template.tointegrate:type_name -> types.tointegrate
+	18, // 10: types.Train.channel:type_name -> types.channel
+	16, // 11: types.Io.status:type_name -> types.templatestate
+	18, // 12: types.Io.channel:type_name -> types.channel
 	7,  // 13: types.Model.papers:type_name -> types.ResearchPaper
 	5,  // 14: types.Models.model:type_name -> types.Model
 	9,  // 15: types.StatMetaCont.stat:type_name -> types.StatMeta
 	11, // 16: types.StatsRange.xapp:type_name -> types.XappIdentifier
-	17, // [17:17] is the sub-list for method output_type
-	17, // [17:17] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	11, // 17: types.RecentPredsInput.xapp:type_name -> types.XappIdentifier
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_types_proto_init() }
@@ -1814,6 +1896,18 @@ func file_types_proto_init() {
 				return nil
 			}
 		}
+		file_types_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RecentPredsInput); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_types_proto_msgTypes[1].OneofWrappers = []interface{}{}
 	file_types_proto_msgTypes[2].OneofWrappers = []interface{}{}
@@ -1828,13 +1922,14 @@ func file_types_proto_init() {
 		(*KeyValue_F)(nil),
 		(*KeyValue_Byte)(nil),
 	}
+	file_types_proto_msgTypes[15].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_types_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
